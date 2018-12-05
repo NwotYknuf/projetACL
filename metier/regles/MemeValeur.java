@@ -2,9 +2,9 @@ package projet.metier.regles;
 
 import projet.metier.*;
 
-public class MemeValeure extends Regle{
+public class MemeValeur extends Regle{
 
-    public MemeValeure(Malus malus){
+    public MemeValeur(Malus malus){
         super(malus);
     }
 

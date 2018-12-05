@@ -13,6 +13,9 @@ public class QuitterListener implements ActionListener{
     }
 
     public void actionPerformed(ActionEvent e){
+
+        //sauvegarder les scores
+
         System.exit(0);
     }
 

@@ -1,6 +1,6 @@
 package projet.metier;
 
-public class ConvertitHauteurValeure{
+public class ConvertitHauteurValeur{
 
     public static int convertit(String hauteur){
         if(hauteur.equals("A")){
@@ -9,7 +9,7 @@ public class ConvertitHauteurValeure{
         if(hauteur.equals("K")){
             return 4;
         }
-        if(hauteur.equals("D")){
+        if(hauteur.equals("Q")){
             return 3;
         }
         if(hauteur.equals("V")){

@@ -12,7 +12,9 @@ public class ConfirmerListener implements ActionListener{
 
     public void actionPerformed(ActionEvent e){
 
-        //Verifs surle pseudo
+        //Verifs sur le pseudo
+
+
         //Creer une nouvelle fenetre de jeux
 
     }

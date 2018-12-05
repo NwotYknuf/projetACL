@@ -8,16 +8,20 @@ public class Partie{
 
     private Vector<Regle> regles;
     private Pioche paquet;
+    private Scores scores;
     private Carte[][] tirage;
     
     private int tour = 0;
     private int score = 0;
+    private String pseudo;
     private boolean partieFinie = false;
 
-    public Partie(Pioche pioche){
+    public Partie(Pioche pioche, String nom){
         this.paquet = pioche;
         regles = new Vector<Regle>();
         tirage = new Carte[NBR_TOURS][2];
+        this.pseudo = nom;
+        scores = new Scores();//A bouger
     }
 
     public void ajouterRegle(Regle r){
@@ -50,17 +54,20 @@ public class Partie{
             }
         }
 
-        tour ++;
-
         if(tour == NBR_TOURS - 1){
             finDePartie();
         }
+        tour ++;
+    }
+
+    public void debutDePartie(){
+        scores.load("scores.txt");
     }
 
     public void finDePartie(){
         partieFinie = true;
-
-        //mettre à jour les scores
+        scores.addScore(score, pseudo);
+        scores.save("scores.txt");
     }
 
 }

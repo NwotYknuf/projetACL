@@ -34,5 +34,7 @@ public class FenetreMenu extends Frame{
         titre.setBounds(100, 50, 150, 50);
         add(titre);
 
+        //charger les scores
+
     }
 }
