@@ -12,7 +12,8 @@ public class Partie{
     private Carte[][] tirage;
     
     private int tour = 0;
-    private int score = 0;
+    private int scoreFinal = 0;
+    private int scoreDuTour = 0;
     private String pseudo;
     private boolean partieFinie = false;
 
@@ -28,12 +29,20 @@ public class Partie{
         regles.add(r);
     }
 
-    public int getNombreTour(){
+    public int getNumeroTour(){
         return tour;
     }
 
-    public int getScore(){
-        return score;
+    public int getScoreFinal(){
+        return scoreFinal;
+    }
+    
+    public int getScoreDuTour() {
+    	return scoreDuTour;
+    }
+    
+    public Carte[][] getTirage() {
+    	return tirage;
     }
 
     public boolean finie(){
@@ -47,16 +56,11 @@ public class Partie{
 
         tirage[tour][0] = carte1;
         tirage[tour][1] = carte2;
-        
-        System.out.println(carte1); // pour tester; a retirer
-        System.out.println(carte2); // pour tester; a retirer
 
-        int points;
         for(Regle regle : regles){
             if(regle.respecte(carte1, carte2)){
-            	points = regle.pointA_Ajouter(carte1, carte2);
-                score += points;
-                System.out.println("Score de la manche : " + points); // pour tester; a retirer
+            	scoreDuTour = regle.pointA_Ajouter(carte1, carte2);
+                scoreFinal += scoreDuTour;
             }
         }
 
@@ -72,7 +76,7 @@ public class Partie{
 
     public void finDePartie(){
         partieFinie = true;
-        scores.addScore(score, pseudo);
+        scores.addScore(scoreFinal, pseudo);
         scores.save("scores.txt");
     }
 

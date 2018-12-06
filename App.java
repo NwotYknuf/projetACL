@@ -6,7 +6,7 @@ import projet.metier.*;
 public class App {
     public static void main( String[] args ){
         FenetreMenu menu = new FenetreMenu();
-        FenetrePseudo pseudo = new FenetrePseudo();
-        FenetreJeux jeux = new FenetreJeux("Pseudo");
+        //FenetrePseudo pseudo = new FenetrePseudo();
+        //FenetreJeux jeux = new FenetreJeux("Pseudo");
     }
 }
