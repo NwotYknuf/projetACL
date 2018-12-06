@@ -11,7 +11,7 @@ public class FenetreMenu extends Frame{
 
     public FenetreMenu(){
 
-        super("ACL");
+        super("ACL - Menu");
         setSize(340,200);
         this.addWindowListener(new QuitterWindowListener());
         setLayout(null);

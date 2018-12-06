@@ -11,7 +11,7 @@ public class FenetrePseudo extends Frame{
 
     public FenetrePseudo(){
 
-        super("ACL");
+        super("ACL - Options");
         setSize(340,200);
         setLayout(null);
         setVisible(true);

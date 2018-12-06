@@ -15,9 +15,14 @@ public class Carte{
         return hauteur;
     }
 
-    public String famille(){
+    public String getFamille(){
         return famille;
     }
+
+	@Override
+	public String toString() {
+		return "Carte [hauteur=" + hauteur + ", famille=" + famille + "]";
+	}
 
 
 }
