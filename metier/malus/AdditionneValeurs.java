@@ -2,7 +2,7 @@ package projet.metier.malus;
 
 import projet.metier.*;
 
-public class SommeValeures extends Malus{
+public class AdditionneValeurs extends Malus{
 
     public int calculeValeur(Carte carte1, Carte carte2){
         return 
