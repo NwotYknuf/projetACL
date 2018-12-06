@@ -6,34 +6,62 @@ import projet.metier.regles.*;
 
 import java.awt.*;
 import java.util.Vector;
+
+import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+import javax.swing.border.Border;
+
 import java.util.Collections;
 
-public class FenetreJeux extends Frame{
+public class FenetreJeux extends Frame {
 
     private Button retour;
     private Button jouer;
-
+    private String pseudo;
     private Partie partie;
+    
+    private JLabel imageCarte1;
+    private JLabel imageCarte2;
 
     private boolean partieFinie = false;
 
     public FenetreJeux(String pseudo){    
-
+    	
         super("ACL - Jeu");
-        setSize(340,200);
+        setSize(340,300);
         setLayout(null);
         setVisible(true);
+        setLocationRelativeTo(null);
         this.addWindowListener(new FermerWindowListener(this));
+        
+        this.pseudo = pseudo;
+        Label nomJoueur = new Label("Pseudo : " + pseudo);
+        nomJoueur.setBounds(80, 30, 180, 20);
+        add(nomJoueur);
+        
+        Border border = BorderFactory.createLineBorder(Color.BLUE, 3);
+        
+        imageCarte1 = new JLabel(new ImageIcon());
+        imageCarte1.setBounds(30, 60, 120, 176);
+        imageCarte1.setBorder(border);
+        this.add(imageCarte1);
+        
+        imageCarte2 = new JLabel(new ImageIcon());
+        imageCarte2.setBounds(190, 60, 120, 176);
+        imageCarte2.setBorder(border);
+        this.add(imageCarte2);
 
         retour = new Button("Retour");
-        retour.setBounds(230,150,100,40);
+        retour.setBounds(230,250,100,40);
+        retour.addActionListener(new RetourListener(this));
         add(retour);
 
         jouer = new Button("Jouer");
-        jouer.setBounds(10,150,100,40);
-        add(jouer);
+        jouer.setBounds(10,250,100,40);
         jouer.addActionListener(new JouerListener(this));
-
+        add(jouer);
+        
         Vector<Carte> cartes = new Vector<Carte>();
         InititialiserPioche(cartes);
 
@@ -56,8 +84,19 @@ public class FenetreJeux extends Frame{
 
     public void joueUnTour(){
         partie.jouerUnTour();
-        System.out.println("tour : " + partie.getNombreTour());
-        System.out.println("score : " + partie.getScore());
+        Carte[][] tirage = partie.getTirage();
+        int tour = partie.getNumeroTour();
+        
+        System.out.println("tour : " + tour);
+        System.out.println("Carte 1 : " + tirage[tour-1][0]);
+        System.out.println("Carte 2 : " + tirage[tour-1][1]);
+        System.out.println("Points du tour : " + partie.getScoreDuTour());
+        System.out.println("score : " + partie.getScoreFinal());
+        
+        
+        // ne fonctionne pas
+        imageCarte1.setIcon(new ImageIcon("projet/ressources/" + tirage[tour-1][0].getHauteur() + "-" + tirage[tour-1][0].getFamille() + ".png"));
+        imageCarte2.setIcon(new ImageIcon("projet/ressources/" + tirage[tour-1][1].getHauteur() + "-" + tirage[tour-1][1].getFamille() + ".png"));
     }
     
     public void InititialiserPioche(Vector<Carte> cartes) {
