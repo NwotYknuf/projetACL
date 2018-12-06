@@ -14,7 +14,7 @@ import javax.swing.border.Border;
 
 import java.util.Collections;
 
-public class FenetreJeux extends Frame {
+public class FenetreJeu extends Frame {
 
     private Button retour;
     private Button jouer;
@@ -26,7 +26,7 @@ public class FenetreJeux extends Frame {
 
     private boolean partieFinie = false;
 
-    public FenetreJeux(String pseudo){    
+    public FenetreJeu(String pseudo){    
     	
         super("ACL - Jeu");
         setSize(340,300);

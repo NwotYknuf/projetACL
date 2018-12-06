@@ -18,7 +18,7 @@ public class ConfirmerListener implements ActionListener{
     		System.out.println("Pseudo invalide");
     	}
     	else { //Creer une nouvelle fenetre de jeux
-    		new FenetreJeux(pseudo);
+    		new FenetreJeu(pseudo);
     		fenetrePseudo.dispose();
     	}
     }

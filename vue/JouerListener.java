@@ -4,9 +4,9 @@ import java.awt.event.*;
 
 public class JouerListener implements ActionListener{
 
-    private FenetreJeux fenetre;
+    private FenetreJeu fenetre;
     
-    public JouerListener(FenetreJeux fenetre){
+    public JouerListener(FenetreJeu fenetre){
         this.fenetre = fenetre;
     }
 
