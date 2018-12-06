@@ -47,10 +47,16 @@ public class Partie{
 
         tirage[tour][0] = carte1;
         tirage[tour][1] = carte2;
+        
+        System.out.println(carte1); // pour tester; a retirer
+        System.out.println(carte2); // pour tester; a retirer
 
+        int points;
         for(Regle regle : regles){
             if(regle.respecte(carte1, carte2)){
-                score += regle.pointA_Ajouter(carte1, carte2);
+            	points = regle.pointA_Ajouter(carte1, carte2);
+                score += points;
+                System.out.println("Score de la manche : " + points); // pour tester; a retirer
             }
         }
 
