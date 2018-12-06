@@ -4,7 +4,7 @@ import projet.metier.Carte;
 import projet.metier.ConvertitHauteurValeur;
 import projet.metier.Malus;
 
-public class SoustraitValeursDouble extends Malus {
+public class SoustraitValeursDoublees extends Malus {
 	
 	public int calculeValeur(Carte carte1, Carte carte2){
         return 

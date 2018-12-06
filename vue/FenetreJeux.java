@@ -46,7 +46,7 @@ public class FenetreJeux extends Frame{
         partie.ajouterRegle(new DifferentesValeursMemeCouleurs(new AdditionneValeurs())); // Dépareillé en valeur mais même couleur : Ajout de la somme des valeurs
         partie.ajouterRegle(new DifferentesValeursDifferentesCouleurs(new AdditionneValeurs())); // Dépareillé en valeur et en couleur : Ajout de la somme des valeurs
         partie.ajouterRegle(new MemeValeursDifferentesCouleurs(new SoustraitValeurs())); // Même valeur mais dépareillé en couleur : Soustrait de la somme des valeurs
-        partie.ajouterRegle(new MemeValeursMemeCouleurs(new SoustraitValeursDouble())); // Même valeur et même couleur : Soustrait le double de la somme des valeurs
+        partie.ajouterRegle(new MemeValeursMemeCouleurs(new SoustraitValeursDoublees())); // Même valeur et même couleur : Soustrait le double de la somme des valeurs
 
     }
 
