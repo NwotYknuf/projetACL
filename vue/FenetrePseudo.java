@@ -15,6 +15,7 @@ public class FenetrePseudo extends Frame{
         setSize(340,200);
         setLayout(null);
         setVisible(true);
+        setLocationRelativeTo(null);
         this.addWindowListener(new FermerWindowListener(this));
 
         labelPseudo = new Label("Entrez votre pseudo");
@@ -23,14 +24,17 @@ public class FenetrePseudo extends Frame{
 
         champPseudo = new TextField(20);
         champPseudo.setBounds(180, 62, 100, 25);
+        champPseudo.setText("");
         add(champPseudo);
 
         retour = new Button("Retour");
         retour.setBounds(230,150,100,40);
+        retour.addActionListener(new RetourListener(this));
         add(retour);
 
         confirmer = new Button("Confirmer");
         confirmer.setBounds(10,150,100,40);
+        confirmer.addActionListener(new ConfirmerListener(this));
         add(confirmer);
 
 

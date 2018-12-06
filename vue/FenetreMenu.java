@@ -15,10 +15,12 @@ public class FenetreMenu extends Frame{
         setSize(340,200);
         this.addWindowListener(new QuitterWindowListener());
         setLayout(null);
+        setLocationRelativeTo(null);
         setVisible(true);
 
         lancer = new Button("Lancer une partie");
         lancer.setBounds(10,150,100,40);
+        lancer.addActionListener(new LancerPartieListener());
         add(lancer);
 
         quitter =new Button("Quitter");  
