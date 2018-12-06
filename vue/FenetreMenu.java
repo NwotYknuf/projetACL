@@ -19,7 +19,7 @@ public class FenetreMenu extends Frame{
         setVisible(true);
 
         lancer = new Button("Lancer une partie");
-        lancer.setBounds(10,150,100,40);
+        lancer.setBounds(10,150,110,40);
         lancer.addActionListener(new LancerPartieListener());
         add(lancer);
 
@@ -29,7 +29,8 @@ public class FenetreMenu extends Frame{
         add(quitter);
 
         scores = new Button("Highscores");
-        scores.setBounds(120,150,100,40);
+        scores.setBounds(125,150,100,40);
+        scores.addActionListener(new HighscoresListener());
         add(scores);
 
         titre = new Label("Super jeu de cartes");
