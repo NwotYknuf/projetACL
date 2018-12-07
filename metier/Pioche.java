@@ -27,4 +27,8 @@ public class Pioche{
         }
     }
 
+    public void rajouterCarte(Carte carte){
+        cartes.add(carte);
+    }
+
 }

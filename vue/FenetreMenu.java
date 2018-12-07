@@ -2,6 +2,8 @@ package projet.vue;
 
 import java.awt.*;
 
+import projet.metier.Scores;
+
 public class FenetreMenu extends Frame{  
 
     private Label titre;
@@ -37,7 +39,7 @@ public class FenetreMenu extends Frame{
         titre.setBounds(100, 50, 150, 50);
         add(titre);
 
-        //charger les scores
+        Scores.getInstance().load("scores.txt");
 
     }
 }

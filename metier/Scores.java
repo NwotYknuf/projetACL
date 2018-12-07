@@ -9,12 +9,20 @@ public class Scores{
 
     private final int NB_SCORE = 10;
 
+    private static Scores INSTANCE = null;
     private Vector<PaireScoreNom> scores;
 
-    public Scores(){
+    private Scores(){
         scores = new Vector<PaireScoreNom>();
     }
     
+    public static Scores getInstance(){           
+        if (INSTANCE == null){   
+            INSTANCE = new Scores(); 
+        }
+        return INSTANCE;
+    }
+
     public void addScore(int score, String nom){
 
         PaireScoreNom paire = new PaireScoreNom(score, nom);
@@ -29,14 +37,16 @@ public class Scores{
 
     public void save(String path){
 
+        String str = "";
         File file = new File(path);
         try{
             FileWriter writer = new FileWriter(file);
 
             for(PaireScoreNom paire : scores){
-                writer.write(paire.score + " " + paire.nom);
+                str += paire.score + " " + paire.nom + "\n";
             }
 
+            writer.write(str);
             writer.close();
         }
         catch(Exception e){
@@ -54,20 +64,22 @@ public class Scores{
         try{
             FileReader reader = new FileReader(file);
 
-            char[] ligne = new char[256];
+            char[] text = new char[1024];
+            reader.read(text);
+            Scanner scanner = new Scanner(String.valueOf(text));
 
-            while(reader.read(ligne)>0){
-                Scanner scanner = new Scanner(String.valueOf(ligne));
-
+            while(true){
                 int score = scanner.nextInt();
-                String nom = scanner.next();
-                nom.trim();
-
-                scores.add(new PaireScoreNom(score, nom));
+                String nom = scanner.nextLine();
+                nom = nom.trim();
+                this.addScore(score, nom);
             }
         }
+        catch(NoSuchElementException e){
+            //Fin de la boucle
+        }
         catch(Exception e){
-
+            e.printStackTrace();
         }
     }
 

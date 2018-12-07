@@ -6,9 +6,8 @@ public class Partie{
 
     public static final int NBR_TOURS = 5;
 
-    private Vector<Regle> regles;
+    private Vector<PaireRegleModification> regles;
     private Pioche paquet;
-    private Scores scores;
     private Carte[][] tirage;
     
     private int tour = 0;
@@ -19,14 +18,13 @@ public class Partie{
 
     public Partie(Pioche pioche, String nom){
         this.paquet = pioche;
-        regles = new Vector<Regle>();
+        regles = new Vector<PaireRegleModification>();
         tirage = new Carte[NBR_TOURS][2];
         this.pseudo = nom;
-        scores = new Scores();//A bouger
     }
 
-    public void ajouterRegle(Regle r){
-        regles.add(r);
+    public void ajouterRegle(Regle r, ModificationScore m){
+        regles.add(new PaireRegleModification(r, m));
     }
 
     public int getNumeroTour(){
@@ -57,12 +55,16 @@ public class Partie{
         tirage[tour][0] = carte1;
         tirage[tour][1] = carte2;
 
-        for(Regle regle : regles){
-            if(regle.respecte(carte1, carte2)){
-            	scoreDuTour = regle.pointA_Ajouter(carte1, carte2);
+        for(PaireRegleModification paire : regles){
+            if(paire.regle.respecte(carte1, carte2)){
+            	scoreDuTour = paire.modif.calculeValeur(carte1, carte2);
                 scoreFinal += scoreDuTour;
             }
         }
+
+        paquet.rajouterCarte(carte1);
+        paquet.rajouterCarte(carte2);
+        paquet.melanger();
 
         if(tour == NBR_TOURS - 1){
             finDePartie();
@@ -71,13 +73,12 @@ public class Partie{
     }
 
     public void debutDePartie(){
-        scores.load("scores.txt");
+        
     }
 
     public void finDePartie(){
         partieFinie = true;
-        scores.addScore(scoreFinal, pseudo);
-        scores.save("scores.txt");
+        Scores.getInstance().addScore(scoreFinal, pseudo);
     }
 
 }

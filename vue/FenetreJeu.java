@@ -1,7 +1,6 @@
 package projet.vue;
 
 import projet.metier.*;
-import projet.metier.malus.*;
 import projet.metier.regles.*;
 
 import java.awt.*;
@@ -69,12 +68,26 @@ public class FenetreJeu extends Frame {
 
         Pioche paquet = new Pioche(cartes);
 
-        partie = new Partie(paquet, "Jean Bono");
+        partie = new Partie(paquet, pseudo);
         
-        partie.ajouterRegle(new DifferentesValeursMemeCouleurs(new AdditionneValeurs())); // Dépareillé en valeur mais même couleur : Ajout de la somme des valeurs
-        partie.ajouterRegle(new DifferentesValeursDifferentesCouleurs(new AdditionneValeurs())); // Dépareillé en valeur et en couleur : Ajout de la somme des valeurs
-        partie.ajouterRegle(new MemeValeursDifferentesCouleurs(new SoustraitValeurs())); // Même valeur mais dépareillé en couleur : Soustrait de la somme des valeurs
-        partie.ajouterRegle(new MemeValeursMemeCouleurs(new SoustraitValeursDoublees())); // Même valeur et même couleur : Soustrait le double de la somme des valeurs
+        ModificationScore somme = new ModificationScore(new Combinaison(1,1));
+        ModificationScore retireSomme = new ModificationScore(new Combinaison(-1, -1));
+        ModificationScore retireDoubleSomme = new ModificationScore(new Combinaison(-2, -2));
+
+        Regle memesCouleurs = new MemesCouleurs();
+        Regle memesValeurs = new MemesValeurs();
+        Regle differentesCouleurs = new Inverse(memesCouleurs);
+        Regle differentesValeurs = new Inverse(memesValeurs);
+
+        Regle differentesValeursMemesCouleurs = new RegleCompose(differentesValeurs, memesCouleurs);
+        Regle differentesValeursDifferentesCouleurs = new RegleCompose(differentesValeurs, differentesCouleurs);
+        Regle memesValeursDifferentesCouleurs = new RegleCompose(memesValeurs, differentesCouleurs);
+        Regle memesValeursMemesCouleurs = new RegleCompose(memesCouleurs, memesValeurs);
+
+        partie.ajouterRegle(differentesValeursMemesCouleurs, somme); // Dï¿½pareillï¿½ en valeur mais mï¿½me couleur : Ajout de la somme des valeurs
+        partie.ajouterRegle(differentesValeursDifferentesCouleurs, somme); // Dï¿½pareillï¿½ en valeur et en couleur : Ajout de la somme des valeurs
+        partie.ajouterRegle(memesValeursDifferentesCouleurs, retireSomme); // Mï¿½me valeur mais dï¿½pareillï¿½ en couleur : Soustrait de la somme des valeurs
+        partie.ajouterRegle(memesValeursMemesCouleurs, retireDoubleSomme); // Mï¿½me valeur et mï¿½me couleur : Soustrait le double de la somme des valeurs
 
     }
 
