@@ -2,10 +2,8 @@ package projet.metier;
 
 import java.util.*;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
-import java.io.IOException;
 
 public class Scores{
 
@@ -62,17 +60,7 @@ public class Scores{
         scores.clear();
 
         File file = new File(path);
-        
-        if (! file.exists()){ // Si le fichier n'existe pas, le créer
-          try {
-			file.createNewFile();
-			System.out.println("Fichier : " + path + " créé.");
-		  } catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		  }
-        }
-        
+
         try{
             FileReader reader = new FileReader(file);
 

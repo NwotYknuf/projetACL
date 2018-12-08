@@ -3,12 +3,14 @@ package projet.vue;
 import projet.metier.*;
 import projet.metier.regles.*;
 
+import java.awt.*;
 import java.util.Vector;
-import java.awt.Button;
-import java.awt.Frame;
-import java.awt.Label;
-import java.awt.Panel;
-import java.awt.ScrollPane;
+
+import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+import javax.swing.border.Border;
+
 import java.util.Collections;
 
 public class FenetreJeu extends Frame {
@@ -18,9 +20,8 @@ public class FenetreJeu extends Frame {
     private String pseudo;
     private Partie partie;
     
-    private Label lRegle;
-    private Panel imageCarte1;
-    private Panel imageCarte2;
+    private JLabel imageCarte1;
+    private JLabel imageCarte2;
 
     private boolean partieFinie = false;
 
@@ -34,23 +35,21 @@ public class FenetreJeu extends Frame {
         this.addWindowListener(new FermerWindowListener(this));
         
         this.pseudo = pseudo;
-        Label nomJoueur = new Label("Joueur : " + pseudo);
-        nomJoueur.setBounds(130, 30, 180, 20);
+        Label nomJoueur = new Label("Pseudo : " + pseudo);
+        nomJoueur.setBounds(80, 30, 180, 20);
         add(nomJoueur);
         
-        lRegle = new Label("Appuyez sur \"Jouer\" pour piocher deux cartes !");
-        lRegle.setBounds(50, 50, 250, 20);
-        add(lRegle);
+        Border border = BorderFactory.createLineBorder(Color.BLUE, 3);
         
-        imageCarte1 = new Panel();
-        imageCarte1.setBounds(30, 70, 120, 180);
-        imageCarte1.add(new ComposentImageAWT("/projet/ressources/0.png", 120, 175));
-        add(imageCarte1);
+        imageCarte1 = new JLabel(new ImageIcon());
+        imageCarte1.setBounds(30, 60, 120, 176);
+        imageCarte1.setBorder(border);
+        this.add(imageCarte1);
         
-        imageCarte2 = new Panel();
-        imageCarte2.setBounds(190, 70, 120, 180);
-        imageCarte2.add(new ComposentImageAWT("/projet/ressources/0.png", 120, 175));
-        add(imageCarte2);
+        imageCarte2 = new JLabel(new ImageIcon());
+        imageCarte2.setBounds(190, 60, 120, 176);
+        imageCarte2.setBorder(border);
+        this.add(imageCarte2);
 
         retour = new Button("Retour");
         retour.setBounds(230,250,100,40);
@@ -90,7 +89,6 @@ public class FenetreJeu extends Frame {
         partie.ajouterRegle(memesValeursDifferentesCouleurs, retireSomme); // M�me valeur mais d�pareill� en couleur : Soustrait de la somme des valeurs
         partie.ajouterRegle(memesValeursMemesCouleurs, retireDoubleSomme); // M�me valeur et m�me couleur : Soustrait le double de la somme des valeurs
 
-        
     }
 
     public boolean partieFinie(){
@@ -108,28 +106,10 @@ public class FenetreJeu extends Frame {
         System.out.println("Points du tour : " + partie.getScoreDuTour());
         System.out.println("score : " + partie.getScoreFinal());
         
-        String pathImage1 = "/projet/ressources/" + tirage[tour-1][0].getHauteur() + "-" + tirage[tour-1][0].getFamille() + ".png";
-        String pathImage2 = "/projet/ressources/" + tirage[tour-1][1].getHauteur() + "-" + tirage[tour-1][1].getFamille() + ".png";
         
-        imageCarte1.remove(0);
-        imageCarte1.add(new ComposentImageAWT(pathImage1, 120, 175));
-        
-        imageCarte2.remove(0);
-        imageCarte2.add(new ComposentImageAWT(pathImage2, 120, 175));
-        
-        this.revalidate();
-        this.repaint();
-        
-        if (partieFinie()) {
-        	//afficher felicitation
-        	
-        	//afficher scorefinal
-        	
-        	lRegle.setVisible(false);
-        	imageCarte1.setVisible(false);
-        	imageCarte2.setVisible(false);
-        	jouer.setEnabled(false);
-        }
+        // ne fonctionne pas
+        imageCarte1.setIcon(new ImageIcon("projet/ressources/" + tirage[tour-1][0].getHauteur() + "-" + tirage[tour-1][0].getFamille() + ".png"));
+        imageCarte2.setIcon(new ImageIcon("projet/ressources/" + tirage[tour-1][1].getHauteur() + "-" + tirage[tour-1][1].getFamille() + ".png"));
     }
     
     public void InititialiserPioche(Vector<Carte> cartes) {
