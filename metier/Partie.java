@@ -13,6 +13,7 @@ public class Partie{
     private int tour = 0;
     private int scoreFinal = 0;
     private int scoreDuTour = 0;
+    private int regleDuTour = 0;
     
     private String pseudo;
     private boolean partieFinie = false;
@@ -24,8 +25,8 @@ public class Partie{
         this.pseudo = nom;
     }
 
-    public void ajouterRegle(Regle r, ModificationScore m){
-        regles.add(new PaireRegleModification(r, m));
+    public void ajouterRegle(int n, Regle r, ModificationScore m){
+        regles.add(new PaireRegleModification(n, r, m));
     }
 
     public int getNumeroTour(){
@@ -43,8 +44,12 @@ public class Partie{
     public Carte[][] getTirage() {
     	return tirage;
     }
+    
+    public int getRegleDuTour() {
+		return regleDuTour;
+	}
 
-    public boolean finie(){
+	public boolean finie(){
         return partieFinie;
     }
 
@@ -58,7 +63,9 @@ public class Partie{
 
         for(PaireRegleModification paire : regles){
             if(paire.regle.respecte(carte1, carte2)){
-            	scoreDuTour = paire.modif.calculeValeur(carte1, carte2);            	
+            	scoreDuTour = paire.modif.calculeValeur(carte1, carte2);  
+            	regleDuTour = paire.numero;
+            	
                 scoreFinal += scoreDuTour;
             }
         }
