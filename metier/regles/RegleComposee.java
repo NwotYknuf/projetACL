@@ -3,17 +3,17 @@ package projet.metier.regles;
 import projet.metier.Regle;
 import projet.metier.Carte;
 
-public class RegleCompose extends Regle{
+public class RegleComposee extends Regle{
 
     private Regle regle1;
     private Regle regle2;
 
-    public RegleCompose(Regle regle1, Regle regle2){
+    public RegleComposee(Regle regle1, Regle regle2){
         this.regle1 = regle1;
         this.regle2 = regle2;
     }
 
-    public Regle getRegle1() {
+	public Regle getRegle1() {
 		return regle1;
 	}
 
