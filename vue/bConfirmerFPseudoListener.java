@@ -3,17 +3,17 @@ package projet.vue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class ConfirmerListener implements ActionListener{
+public class bConfirmerFPseudoListener implements ActionListener{
 
-    private FenetrePseudo fenetrePseudo;
+    private FenetrePseudo fenetre;
 
-    public ConfirmerListener(FenetrePseudo fenetrePseudo){
-        this.fenetrePseudo = fenetrePseudo;
+    public bConfirmerFPseudoListener(FenetrePseudo fenetre){
+        this.fenetre = fenetre;
     }
 
     public void actionPerformed(ActionEvent e){
     	
-    	String pseudo = fenetrePseudo.getPseudo();
+    	String pseudo = fenetre.getPseudo();
     	
     	String regExpression = "[a-zA-Z_0-9]*"; 
         
@@ -26,7 +26,7 @@ public class ConfirmerListener implements ActionListener{
     	}
     	else { //Le pseudo est correct, créer une nouvelle fenetre de jeux
     		new FenetreJeu(pseudo);
-    		fenetrePseudo.dispose();
+    		fenetre.dispose();
     	}
     }
 }

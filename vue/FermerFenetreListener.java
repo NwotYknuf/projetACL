@@ -3,11 +3,11 @@ package projet.vue;
 import java.awt.event.*;
 import java.awt.*;
 
-public class FermerWindowListener implements WindowListener{
+public class FermerFenetreListener implements WindowListener{
 
     private Frame window;
 
-    public FermerWindowListener(Frame window){
+    public FermerFenetreListener(Frame window){
         this.window = window;
     }
 

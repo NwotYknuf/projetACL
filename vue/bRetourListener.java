@@ -4,11 +4,11 @@ import java.awt.Frame;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class RetourListener implements ActionListener {
+public class bRetourListener implements ActionListener {
 	
     private Frame fenetre;
     
-    public RetourListener(Frame fenetre){
+    public bRetourListener(Frame fenetre){
     	this.fenetre = fenetre;
     }
 

@@ -2,11 +2,11 @@ package projet.vue;
 
 import java.awt.event.*;
 
-public class JouerListener implements ActionListener{
+public class bJouerFJeuListener implements ActionListener{
 
     private FenetreJeu fenetre;
     
-    public JouerListener(FenetreJeu fenetre){
+    public bJouerFJeuListener(FenetreJeu fenetre){
         this.fenetre = fenetre;
     }
 

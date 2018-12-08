@@ -8,9 +8,9 @@ import projet.metier.Scores;
  * Classe pour les evenements de fermeture de l'apli
  */
 
-public class QuitterListener implements ActionListener{
+public class bQuitterFMenuListener implements ActionListener{
 
-    public QuitterListener(){
+    public bQuitterFMenuListener(){
 
     }
 

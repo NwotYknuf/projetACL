@@ -2,9 +2,9 @@ package projet.vue;
 
 import java.awt.event.*;
 
-public class QuitterWindowListener implements WindowListener{
+public class QuitterAppListener implements WindowListener{
 
-    public QuitterWindowListener(){
+    public QuitterAppListener(){
 
     }
 
