@@ -5,54 +5,50 @@ import projet.metier.regles.*;
 
 import java.util.Vector;
 import java.awt.Button;
+import java.awt.Color;
 import java.awt.Font;
-import java.awt.FontFormatException;
 import java.awt.Frame;
-import java.awt.GraphicsEnvironment;
 import java.awt.Label;
 import java.awt.Panel;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
+import java.awt.TextArea;
 import java.util.Collections;
 
 public class FenetreJeu extends Frame {
 
-    private Button retour;
-    private Button jouer;
+    private Button bRetour, bJouer, bContinuer;
     private Partie partie;
     
-    private Label lConsigne1, lConsigne2, lTour, lPointsTour, lScore;
+    private Label lConsigne1, lConsigne2, lTour, lRegleAppliquee, lPointsTour, lScore;
     private Panel imageCarte1;
     private Panel imageCarte2;
+    private TextArea tbReglesJeu;
 
     public FenetreJeu(String pseudo){    
     	
         super("ACL - Jeu");
-        setSize(340,400);
+        setSize(640,400);
         setLayout(null);
         setVisible(true);
         setLocationRelativeTo(null);
-        this.addWindowListener(new FermerWindowListener(this));
+        this.addWindowListener(new FermerFenetreListener(this));
         
         //Label Pseudo
         Label lNomJoueur = new Label("Joueur : " + pseudo);
-        lNomJoueur.setBounds(30, 40, 180, 10);
+        lNomJoueur.setBounds(30, 40, 180, 12);
         add(lNomJoueur);
         
         //Label comment jouer
         lConsigne1 = new Label("Appuyez sur \"Jouer\" pour piocher deux cartes !");
-        lConsigne1.setBounds(50, 60, 270, 10);
+        lConsigne1.setBounds(50, 60, 270, 12);
         add(lConsigne1);
         lConsigne2 = new Label("Vous avez 5 tours pour faire le meilleur score (négatif) !");
-        lConsigne2.setBounds(20, 75, 320, 10);
+        lConsigne2.setBounds(20, 75, 305, 12);
         add(lConsigne2);
         
         // Label numéro du tour
         lTour = new Label("Tour n°0 : ");
-        lTour.setBounds(145, 100, 100, 10);
+        lTour.setBounds(145, 100, 100, 12);
+        lTour.setForeground(Color.BLUE);
         add(lTour);
         
         // Panel image de la carte 1
@@ -66,28 +62,56 @@ public class FenetreJeu extends Frame {
         imageCarte2.setBounds(190, 110, 120, 180);
         imageCarte2.add(new ComposantImageAWT("/projet/ressources/0.png", 120, 175));
         add(imageCarte2);
+        
+        // Label Regle Appliquée
+        lRegleAppliquee = new Label("");
+        lRegleAppliquee.setBounds(50, 295, 200, 12);
+        add(lRegleAppliquee);
 
         // Label Points du tour
         lPointsTour = new Label("");
-        lPointsTour.setBounds(50, 310, 220, 20);
+        lPointsTour.setBounds(50, 310, 220, 12);
         add(lPointsTour);
         
         // Label Score du joueur
         lScore = new Label("Votre score : 0 point");
-        lScore.setBounds(50, 330, 180, 20);
+        lScore.setBounds(50, 330, 180, 12);
+        lScore.setForeground(Color.BLUE);
         add(lScore);
         
         //Bouton Retour
-        retour = new Button("Retour");
-        retour.setBounds(230,350,100,40);
-        retour.addActionListener(new RetourListener(this));
-        add(retour);
+        bRetour = new Button("Retour");
+        bRetour.setBounds(230,350,100,40);
+        bRetour.addActionListener(new bRetourListener(this));
+        add(bRetour);
 
         // Bouton Jouer
-        jouer = new Button("Jouer");
-        jouer.setBounds(10,350,100,40);
-        jouer.addActionListener(new JouerListener(this));
-        add(jouer);
+        bJouer = new Button("Jouer");
+        bJouer.setBounds(10,350,100,40);
+        bJouer.addActionListener(new bJouerFJeuListener(this));
+        add(bJouer);
+        
+        // TextArea Explication des règles
+        tbReglesJeu = new TextArea("", 20, 1, TextArea.SCROLLBARS_NONE);
+        tbReglesJeu.setBounds(335, 35, 295, 355);
+        tbReglesJeu.setFont(new Font("Courier New", Font.PLAIN, 11));
+        tbReglesJeu.setEditable(false);
+        tbReglesJeu.append("  Voici les règles du jeu :\n\n");
+        tbReglesJeu.append("  A chaque tour de jeu, deux cartes seront piochées, celles-ci vous rapporteront des points en fonctions du tirage selon le schéma suivant : \n");
+        tbReglesJeu.append("     1 - Les deux cartes n'ont pas la même valeur et/ou n'ont pas la même couleur = Ajout de la valeur des 2 cartes. \n");
+        tbReglesJeu.append("     2 - Les deux cartes ont la même valeur mais n'ont pas la même couleur = Retrait de la valeur des 2 cartes. \n");
+        tbReglesJeu.append("     3 - Les deux cartes ont la même valeur et ont la même couleur = Retrait 2 fois de la valeur des 2 cartes. \n\n");
+        tbReglesJeu.append("  Vient enfin la valeur des cartes : \n");
+        tbReglesJeu.append("     - As : 11 points\n");
+        tbReglesJeu.append("     - 10 : 10 points\n");
+        tbReglesJeu.append("     - Roi : 4 points\n");
+        tbReglesJeu.append("     - Dame : 3 points\n");
+        tbReglesJeu.append("     - Valet : 2 points\n");
+        tbReglesJeu.append("     - 9 : 0 point\n");
+        tbReglesJeu.append("     - 8 : 0 point\n");
+        tbReglesJeu.append("     - 7 : 0 point\n\n");
+        tbReglesJeu.append("  Le but étant d'avoir le nombre de points le plus faible !\n  Bon jeu !");
+        add(tbReglesJeu);
         
         Vector<Carte> cartes = new Vector<Carte>();
         InititialiserPioche(cartes);
@@ -107,15 +131,15 @@ public class FenetreJeu extends Frame {
         Regle differentesCouleurs = new Inverse(memesCouleurs);
         Regle differentesValeurs = new Inverse(memesValeurs);
 
-        Regle differentesValeursMemesCouleurs = new RegleCompose(differentesValeurs, memesCouleurs);
-        Regle differentesValeursDifferentesCouleurs = new RegleCompose(differentesValeurs, differentesCouleurs);
-        Regle memesValeursDifferentesCouleurs = new RegleCompose(memesValeurs, differentesCouleurs);
-        Regle memesValeursMemesCouleurs = new RegleCompose(memesCouleurs, memesValeurs);
+        RegleComposee differentesValeursMemesCouleurs = new RegleComposee(differentesValeurs, memesCouleurs);
+        RegleComposee differentesValeursDifferentesCouleurs = new RegleComposee(differentesValeurs, differentesCouleurs);
+        RegleComposee memesValeursDifferentesCouleurs = new RegleComposee(memesValeurs, differentesCouleurs);
+        RegleComposee memesValeursMemesCouleurs = new RegleComposee(memesCouleurs, memesValeurs);
 
-        partie.ajouterRegle(differentesValeursMemesCouleurs, somme); // Dï¿½pareillï¿½ en valeur mais mï¿½me couleur : Ajout de la somme des valeurs
-        partie.ajouterRegle(differentesValeursDifferentesCouleurs, somme); // Dï¿½pareillï¿½ en valeur et en couleur : Ajout de la somme des valeurs
-        partie.ajouterRegle(memesValeursDifferentesCouleurs, retireSomme); // Mï¿½me valeur mais dï¿½pareillï¿½ en couleur : Soustrait de la somme des valeurs
-        partie.ajouterRegle(memesValeursMemesCouleurs, retireDoubleSomme); // Mï¿½me valeur et mï¿½me couleur : Soustrait le double de la somme des valeurs
+        partie.ajouterRegle(1, differentesValeursMemesCouleurs, somme); // Dï¿½pareillï¿½ en valeur mais mï¿½me couleur : Ajout de la somme des valeurs
+        partie.ajouterRegle(1, differentesValeursDifferentesCouleurs, somme); // Dï¿½pareillï¿½ en valeur et en couleur : Ajout de la somme des valeurs
+        partie.ajouterRegle(2, memesValeursDifferentesCouleurs, retireSomme); // Mï¿½me valeur mais dï¿½pareillï¿½ en couleur : Soustrait de la somme des valeurs
+        partie.ajouterRegle(3, memesValeursMemesCouleurs, retireDoubleSomme); // Mï¿½me valeur et mï¿½me couleur : Soustrait le double de la somme des valeurs
 
         
     }
@@ -146,6 +170,8 @@ public class FenetreJeu extends Frame {
         imageCarte2.add(new ComposantImageAWT(pathImage2, 120, 175));
         
         //Affiche la règle appliquée
+        int regleAppliquee = partie.getRegleDuTour();
+        lRegleAppliquee.setText("Grâce à la règle numéro " + regleAppliquee + ";");
         
         //Affiche les points du tour
         lPointsTour.setText("Vous remportez sur ce tour : " + partie.getScoreDuTour() + " points.");
@@ -166,44 +192,13 @@ public class FenetreJeu extends Frame {
         
         
         if (partieFinie()) {
-        	//afficher felicitation
+        	bJouer.setVisible(false);
+        	bRetour.setEnabled(false);
         	
-        	Label lFelicitation = new Label("Félicitations !");
-			lFelicitation.setBounds(60, 120, 100, 40);
-			add(lFelicitation);
-        	
-			try {
-				GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-				Font font = new Font(Font.createFont(Font.TRUETYPE_FONT, new FileInputStream(new File("/projet/ressources/Black-Melody.otf"))).getFamily(), Font.BOLD, 35);
-				ge.registerFont(font);
-				lFelicitation.setFont(font);
-				
-			} catch (FileNotFoundException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (FontFormatException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-        	
-        	//afficher scorefinal
-        	Label lScoreFinal = new Label("Votre score final est de : " + partie.getScoreFinal() + " points.");
-        	lScoreFinal.setBounds(60, 180, 300, 40);
-        	add(lScoreFinal);
-        	
-        	
-        	lConsigne1.setVisible(false);
-        	lConsigne2.setVisible(false);
-        	lTour.setVisible(false);
-        	imageCarte1.setVisible(false);
-        	imageCarte2.setVisible(false);
-        	lPointsTour.setVisible(false);
-        	lScore.setVisible(false);
-        	
-        	jouer.setEnabled(false);
+        	bContinuer = new Button("Continuer");
+        	bContinuer.setBounds(10,350,100,40);
+        	bContinuer.addActionListener(new bContinuerFJeuListener(this));
+            add(bContinuer);
         }
     }
     
@@ -249,4 +244,55 @@ public class FenetreJeu extends Frame {
         cartes.add(new Carte("7", "trefle"));
     }
 
+	public Label getlConsigne1() {
+		return lConsigne1;
+	}
+
+	public Label getlConsigne2() {
+		return lConsigne2;
+	}
+
+	public Label getlTour() {
+		return lTour;
+	}
+
+	public Label getlRegleAppliquee() {
+		return lRegleAppliquee;
+	}
+
+	public Label getlPointsTour() {
+		return lPointsTour;
+	}
+
+	public Label getlScore() {
+		return lScore;
+	}
+
+	public TextArea getTbReglesJeu() {
+		return tbReglesJeu;
+	}
+
+	public Panel getImageCarte1() {
+		return imageCarte1;
+	}
+
+	public Panel getImageCarte2() {
+		return imageCarte2;
+	}
+
+	public Partie getPartie() {
+		return partie;
+	}
+
+	public Button getbRetour() {
+		return bRetour;
+	}
+
+	public Button getbJouer() {
+		return bJouer;
+	}
+	
+	public Button getbContinuer() {
+		return bContinuer;
+	}
 }
