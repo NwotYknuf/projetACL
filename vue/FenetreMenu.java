@@ -7,33 +7,33 @@ import projet.metier.Scores;
 public class FenetreMenu extends Frame{  
 
     private Label titre;
-    private Button quitter;
-    private Button lancer;
-    private Button scores;
+    private Button bQuitter;
+    private Button bLancer;
+    private Button bHighscores;
 
     public FenetreMenu(){
 
         super("ACL - Menu");
         setSize(340,200);
-        this.addWindowListener(new QuitterWindowListener());
+        this.addWindowListener(new QuitterAppListener());
         setLayout(null);
         setLocationRelativeTo(null);
         setVisible(true);
 
-        lancer = new Button("Lancer une partie");
-        lancer.setBounds(10,150,110,40);
-        lancer.addActionListener(new LancerPartieListener());
-        add(lancer);
+        bLancer = new Button("Lancer une partie");
+        bLancer.setBounds(10,150,110,40);
+        bLancer.addActionListener(new bLancerPartieFMenuListener());
+        add(bLancer);
 
-        quitter =new Button("Quitter");  
-        quitter.setBounds(230,150,100,40);
-        quitter.addActionListener(new QuitterListener());
-        add(quitter);
+        bQuitter =new Button("Quitter");  
+        bQuitter.setBounds(230,150,100,40);
+        bQuitter.addActionListener(new bQuitterFMenuListener());
+        add(bQuitter);
 
-        scores = new Button("Highscores");
-        scores.setBounds(125,150,100,40);
-        scores.addActionListener(new HighscoresListener());
-        add(scores);
+        bHighscores = new Button("Highscores");
+        bHighscores.setBounds(125,150,100,40);
+        bHighscores.addActionListener(new bHighscoresFMenuListener());
+        add(bHighscores);
 
         titre = new Label("Super jeu de cartes");
         titre.setBounds(100, 50, 150, 50);

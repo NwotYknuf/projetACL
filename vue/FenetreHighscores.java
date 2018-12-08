@@ -15,7 +15,7 @@ public class FenetreHighscores extends Frame {
 
     private Label lScores;
     private TextArea tbScores;
-    private Button retour;
+    private Button bRetour;
     
     private Vector<PaireScoreNom> scores;
     
@@ -26,7 +26,7 @@ public class FenetreHighscores extends Frame {
 	        setLayout(null);
 	        setVisible(true);
 	        setLocationRelativeTo(null);
-	        this.addWindowListener(new FermerWindowListener(this));
+	        this.addWindowListener(new FermerFenetreListener(this));
 	        
 	        lScores = new Label("Voici les 10 meilleurs scores :");
 	        lScores.setBounds(20, 50, 200, 10);
@@ -44,10 +44,10 @@ public class FenetreHighscores extends Frame {
 	        }
 	        add(tbScores);
 	        
-	        retour = new Button("Retour");
-	        retour.setBounds(230,250,100,40);
-	        retour.addActionListener(new RetourListener(this));
-	        add(retour);
+	        bRetour = new Button("Retour");
+	        bRetour.setBounds(230,250,100,40);
+	        bRetour.addActionListener(new bRetourListener(this));
+	        add(bRetour);
 	}
 
 }
