@@ -25,7 +25,11 @@ public class Scores{
         return INSTANCE;
     }
 
-    public void addScore(int score, String nom){
+    public Vector<PaireScoreNom> getScores() {
+		return scores;
+	}
+
+	public void addScore(int score, String nom){
 
         PaireScoreNom paire = new PaireScoreNom(score, nom);
         scores.add(paire);

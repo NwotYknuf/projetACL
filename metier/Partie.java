@@ -13,6 +13,7 @@ public class Partie{
     private int tour = 0;
     private int scoreFinal = 0;
     private int scoreDuTour = 0;
+    
     private String pseudo;
     private boolean partieFinie = false;
 
@@ -57,7 +58,7 @@ public class Partie{
 
         for(PaireRegleModification paire : regles){
             if(paire.regle.respecte(carte1, carte2)){
-            	scoreDuTour = paire.modif.calculeValeur(carte1, carte2);
+            	scoreDuTour = paire.modif.calculeValeur(carte1, carte2);            	
                 scoreFinal += scoreDuTour;
             }
         }

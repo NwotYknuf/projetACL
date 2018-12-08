@@ -40,6 +40,5 @@ public class FenetreMenu extends Frame{
         add(titre);
 
         Scores.getInstance().load("scores.txt");
-
     }
 }
