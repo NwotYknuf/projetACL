@@ -5,60 +5,87 @@ import projet.metier.regles.*;
 
 import java.util.Vector;
 import java.awt.Button;
+import java.awt.Font;
+import java.awt.FontFormatException;
 import java.awt.Frame;
+import java.awt.GraphicsEnvironment;
 import java.awt.Label;
 import java.awt.Panel;
-import java.awt.ScrollPane;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.Collections;
 
 public class FenetreJeu extends Frame {
 
     private Button retour;
     private Button jouer;
-    private String pseudo;
     private Partie partie;
     
-    private Label lRegle;
+    private Label lConsigne1, lConsigne2, lTour, lPointsTour, lScore;
     private Panel imageCarte1;
     private Panel imageCarte2;
-
-    private boolean partieFinie = false;
 
     public FenetreJeu(String pseudo){    
     	
         super("ACL - Jeu");
-        setSize(340,300);
+        setSize(340,400);
         setLayout(null);
         setVisible(true);
         setLocationRelativeTo(null);
         this.addWindowListener(new FermerWindowListener(this));
         
-        this.pseudo = pseudo;
-        Label nomJoueur = new Label("Joueur : " + pseudo);
-        nomJoueur.setBounds(130, 30, 180, 20);
-        add(nomJoueur);
+        //Label Pseudo
+        Label lNomJoueur = new Label("Joueur : " + pseudo);
+        lNomJoueur.setBounds(30, 40, 180, 10);
+        add(lNomJoueur);
         
-        lRegle = new Label("Appuyez sur \"Jouer\" pour piocher deux cartes !");
-        lRegle.setBounds(50, 50, 250, 20);
-        add(lRegle);
+        //Label comment jouer
+        lConsigne1 = new Label("Appuyez sur \"Jouer\" pour piocher deux cartes !");
+        lConsigne1.setBounds(50, 60, 270, 10);
+        add(lConsigne1);
+        lConsigne2 = new Label("Vous avez 5 tours pour faire le meilleur score (négatif) !");
+        lConsigne2.setBounds(20, 75, 320, 10);
+        add(lConsigne2);
         
+        // Label numéro du tour
+        lTour = new Label("Tour n°0 : ");
+        lTour.setBounds(145, 100, 100, 10);
+        add(lTour);
+        
+        // Panel image de la carte 1
         imageCarte1 = new Panel();
-        imageCarte1.setBounds(30, 70, 120, 180);
-        imageCarte1.add(new ComposentImageAWT("/projet/ressources/0.png", 120, 175));
+        imageCarte1.setBounds(30, 110, 120, 180);
+        imageCarte1.add(new ComposantImageAWT("/projet/ressources/0.png", 120, 175));
         add(imageCarte1);
         
+        // Panel image de la carte 2
         imageCarte2 = new Panel();
-        imageCarte2.setBounds(190, 70, 120, 180);
-        imageCarte2.add(new ComposentImageAWT("/projet/ressources/0.png", 120, 175));
+        imageCarte2.setBounds(190, 110, 120, 180);
+        imageCarte2.add(new ComposantImageAWT("/projet/ressources/0.png", 120, 175));
         add(imageCarte2);
 
+        // Label Points du tour
+        lPointsTour = new Label("");
+        lPointsTour.setBounds(50, 310, 220, 20);
+        add(lPointsTour);
+        
+        // Label Score du joueur
+        lScore = new Label("Votre score : 0 point");
+        lScore.setBounds(50, 330, 180, 20);
+        add(lScore);
+        
+        //Bouton Retour
         retour = new Button("Retour");
-        retour.setBounds(230,250,100,40);
+        retour.setBounds(230,350,100,40);
         retour.addActionListener(new RetourListener(this));
         add(retour);
 
+        // Bouton Jouer
         jouer = new Button("Jouer");
-        jouer.setBounds(10,250,100,40);
+        jouer.setBounds(10,350,100,40);
         jouer.addActionListener(new JouerListener(this));
         add(jouer);
         
@@ -98,36 +125,84 @@ public class FenetreJeu extends Frame {
     }
 
     public void joueUnTour(){
-        partie.jouerUnTour();
-        Carte[][] tirage = partie.getTirage();
-        int tour = partie.getNumeroTour();
+        partie.jouerUnTour();      
         
-        System.out.println("tour : " + tour);
-        System.out.println("Carte 1 : " + tirage[tour-1][0]);
-        System.out.println("Carte 2 : " + tirage[tour-1][1]);
-        System.out.println("Points du tour : " + partie.getScoreDuTour());
-        System.out.println("score : " + partie.getScoreFinal());
+        //Affiche le tour
+        
+        int tour = partie.getNumeroTour();
+        lTour.setText("Tour n°" + tour + " : ");
+        
+        //Affiche les cartes
+        
+        Carte[][] tirage = partie.getTirage();
         
         String pathImage1 = "/projet/ressources/" + tirage[tour-1][0].getHauteur() + "-" + tirage[tour-1][0].getFamille() + ".png";
         String pathImage2 = "/projet/ressources/" + tirage[tour-1][1].getHauteur() + "-" + tirage[tour-1][1].getFamille() + ".png";
         
         imageCarte1.remove(0);
-        imageCarte1.add(new ComposentImageAWT(pathImage1, 120, 175));
+        imageCarte1.add(new ComposantImageAWT(pathImage1, 120, 175));
         
         imageCarte2.remove(0);
-        imageCarte2.add(new ComposentImageAWT(pathImage2, 120, 175));
+        imageCarte2.add(new ComposantImageAWT(pathImage2, 120, 175));
         
+        //Affiche la règle appliquée
+        
+        //Affiche les points du tour
+        lPointsTour.setText("Vous remportez sur ce tour : " + partie.getScoreDuTour() + " points.");
+        
+        //Affiche les scores
+        lScore.setText("Votre score : " + partie.getScoreFinal() + " points.");
+        
+        //Met à jour les composants sur la fenêtre
         this.revalidate();
         this.repaint();
+        
+        
+        System.out.println("Tour n°" + tour + " : ");
+        System.out.println("Carte 1 : " + tirage[tour-1][0]);
+        System.out.println("Carte 2 : " + tirage[tour-1][1]);
+        System.out.println("Points du tour : " + partie.getScoreDuTour());
+        System.out.println("score : " + partie.getScoreFinal());
+        
         
         if (partieFinie()) {
         	//afficher felicitation
         	
-        	//afficher scorefinal
+        	Label lFelicitation = new Label("Félicitations !");
+			lFelicitation.setBounds(60, 120, 100, 40);
+			add(lFelicitation);
         	
-        	lRegle.setVisible(false);
+			try {
+				GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+				Font font = new Font(Font.createFont(Font.TRUETYPE_FONT, new FileInputStream(new File("/projet/ressources/Black-Melody.otf"))).getFamily(), Font.BOLD, 35);
+				ge.registerFont(font);
+				lFelicitation.setFont(font);
+				
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (FontFormatException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+        	
+        	//afficher scorefinal
+        	Label lScoreFinal = new Label("Votre score final est de : " + partie.getScoreFinal() + " points.");
+        	lScoreFinal.setBounds(60, 180, 300, 40);
+        	add(lScoreFinal);
+        	
+        	
+        	lConsigne1.setVisible(false);
+        	lConsigne2.setVisible(false);
+        	lTour.setVisible(false);
         	imageCarte1.setVisible(false);
         	imageCarte2.setVisible(false);
+        	lPointsTour.setVisible(false);
+        	lScore.setVisible(false);
+        	
         	jouer.setEnabled(false);
         }
     }
