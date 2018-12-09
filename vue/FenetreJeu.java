@@ -15,9 +15,9 @@ import java.util.Collections;
 
 public class FenetreJeu extends Frame {
 
-    private Button bRetour, bJouer, bContinuer;
     private Partie partie;
     
+    private Button bRetour, bJouer, bContinuer;
     private Label lConsigne1, lConsigne2, lTour, lRegleAppliquee, lPointsTour, lScore;
     private Panel imageCarte1;
     private Panel imageCarte2;
@@ -34,20 +34,20 @@ public class FenetreJeu extends Frame {
         
         //Label Pseudo
         Label lNomJoueur = new Label("Joueur : " + pseudo);
-        lNomJoueur.setBounds(30, 40, 180, 12);
+        lNomJoueur.setBounds(30, 40, 180, 15);
         add(lNomJoueur);
         
         //Label comment jouer
         lConsigne1 = new Label("Appuyez sur \"Jouer\" pour piocher deux cartes !");
-        lConsigne1.setBounds(50, 60, 270, 12);
+        lConsigne1.setBounds(50, 60, 270, 15);
         add(lConsigne1);
         lConsigne2 = new Label("Vous avez 5 tours pour faire le meilleur score (négatif) !");
-        lConsigne2.setBounds(20, 75, 305, 12);
+        lConsigne2.setBounds(20, 75, 305, 15);
         add(lConsigne2);
         
         // Label numéro du tour
         lTour = new Label("Tour n°0 : ");
-        lTour.setBounds(145, 100, 100, 12);
+        lTour.setBounds(145, 100, 100, 15);
         lTour.setForeground(Color.BLUE);
         add(lTour);
         
@@ -65,17 +65,17 @@ public class FenetreJeu extends Frame {
         
         // Label Regle Appliquée
         lRegleAppliquee = new Label("");
-        lRegleAppliquee.setBounds(50, 295, 200, 12);
+        lRegleAppliquee.setBounds(50, 295, 200, 15);
         add(lRegleAppliquee);
 
         // Label Points du tour
         lPointsTour = new Label("");
-        lPointsTour.setBounds(50, 310, 220, 12);
+        lPointsTour.setBounds(50, 310, 220, 15);
         add(lPointsTour);
         
         // Label Score du joueur
         lScore = new Label("Votre score : 0 point");
-        lScore.setBounds(50, 330, 180, 12);
+        lScore.setBounds(50, 330, 180, 15);
         lScore.setForeground(Color.BLUE);
         add(lScore);
         
@@ -171,10 +171,10 @@ public class FenetreJeu extends Frame {
         
         //Affiche la règle appliquée
         int regleAppliquee = partie.getRegleDuTour();
-        lRegleAppliquee.setText("Grâce à la règle numéro " + regleAppliquee + ";");
+        lRegleAppliquee.setText("Grâce à la règle numéro " + regleAppliquee + " ;");
         
         //Affiche les points du tour
-        lPointsTour.setText("Vous remportez sur ce tour : " + partie.getScoreDuTour() + " points.");
+        lPointsTour.setText("Vous optenez sur ce tour : " + partie.getScoreDuTour() + " points.");
         
         //Affiche les scores
         lScore.setText("Votre score : " + partie.getScoreFinal() + " points.");

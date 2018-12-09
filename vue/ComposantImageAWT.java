@@ -45,7 +45,7 @@ class ComposantImageAWT extends Panel
         try {
         	URL url = getClass().getResource(path);
         	Toolkit toolkit = Toolkit.getDefaultToolkit();
-        	image = toolkit.getImage( url );
+        	image = toolkit.getImage(url);
         	image = image.getScaledInstance(widthImage, heightImage, Image.SCALE_SMOOTH);
         	MediaTracker tracker = new MediaTracker(this);
         	tracker.addImage(image, 0);
