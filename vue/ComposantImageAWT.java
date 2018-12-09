@@ -10,7 +10,7 @@ import java.net.URL;
 
 import javax.swing.ImageIcon;
 
-class ComposantImageAWT extends Panel
+public class ComposantImageAWT extends Panel
 {
     Image image;
   

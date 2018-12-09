@@ -2,6 +2,10 @@ package projet.vue;
 
 import java.awt.*;
 
+import projet.controles.FermerFenetreListener;
+import projet.controles.bConfirmerFPseudoListener;
+import projet.controles.bRetourListener;
+
 public class FenetrePseudo extends Frame{
 
     private Label lPseudo;

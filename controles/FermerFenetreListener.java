@@ -1,11 +1,14 @@
-package projet.vue;
+package projet.controles;
 
 import java.awt.event.*;
+import java.awt.*;
 
-public class QuitterAppListener implements WindowListener{
+public class FermerFenetreListener implements WindowListener{
 
-    public QuitterAppListener(){
+    private Frame window;
 
+    public FermerFenetreListener(Frame window){
+        this.window = window;
     }
 
     public void windowClosed(WindowEvent e){
@@ -17,7 +20,7 @@ public class QuitterAppListener implements WindowListener{
     }
 
     public void windowClosing(WindowEvent e){
-        System.exit(0);
+        window.dispose();
     }
 
     public void windowOpened(WindowEvent e){

@@ -1,6 +1,8 @@
-package projet.vue;
+package projet.controles;
 
 import java.awt.event.*;
+
+import projet.vue.FenetreJeu;
 
 public class bJouerFJeuListener implements ActionListener{
 

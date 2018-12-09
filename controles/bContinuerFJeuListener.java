@@ -1,4 +1,4 @@
-package projet.vue;
+package projet.controles;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -14,6 +14,9 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
+
+import projet.vue.ComposantImageAWT;
+import projet.vue.FenetreJeu;
 
 public class bContinuerFJeuListener implements ActionListener {
 	

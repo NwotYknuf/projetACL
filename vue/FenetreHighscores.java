@@ -9,6 +9,8 @@ import java.awt.Panel;
 import java.awt.TextArea;
 import java.util.Vector;
 
+import projet.controles.FermerFenetreListener;
+import projet.controles.bRetourListener;
 import projet.metier.PaireScoreNom;
 import projet.metier.Scores;
 

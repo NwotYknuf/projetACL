@@ -1,4 +1,4 @@
-package projet.vue;
+package projet.controles;
 
 import java.awt.event.*;
 

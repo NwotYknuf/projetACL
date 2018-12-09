@@ -1,5 +1,9 @@
 package projet.vue;
 
+import projet.controles.FermerFenetreListener;
+import projet.controles.bContinuerFJeuListener;
+import projet.controles.bJouerFJeuListener;
+import projet.controles.bRetourListener;
 import projet.metier.*;
 import projet.metier.regles.*;
 

@@ -2,6 +2,10 @@ package projet.vue;
 
 import java.awt.*;
 
+import projet.controles.QuitterAppListener;
+import projet.controles.bHighscoresFMenuListener;
+import projet.controles.bLancerPartieFMenuListener;
+import projet.controles.bQuitterFMenuListener;
 import projet.metier.Scores;
 
 public class FenetreMenu extends Frame{  
