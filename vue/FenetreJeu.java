@@ -19,8 +19,8 @@ public class FenetreJeu extends Frame {
     
     private Button bRetour, bJouer, bContinuer;
     private Label lConsigne1, lConsigne2, lTour, lRegleAppliquee, lPointsTour, lScore;
-    private Panel imageCarte1;
-    private Panel imageCarte2;
+    private Panel imageCarte1, imageCarte2;
+    private Panel pBackground;
     private TextArea tbReglesJeu;
 
     public FenetreJeu(String pseudo){    
@@ -30,11 +30,12 @@ public class FenetreJeu extends Frame {
         setLayout(null);
         setVisible(true);
         setLocationRelativeTo(null);
+        setResizable(false);
         this.addWindowListener(new FermerFenetreListener(this));
         
         //Label Pseudo
         Label lNomJoueur = new Label("Joueur : " + pseudo);
-        lNomJoueur.setBounds(30, 40, 180, 15);
+        lNomJoueur.setBounds(30, 40, 130, 15);
         add(lNomJoueur);
         
         //Label comment jouer
@@ -91,6 +92,13 @@ public class FenetreJeu extends Frame {
         bJouer.addActionListener(new bJouerFJeuListener(this));
         add(bJouer);
         
+        // Bouton Continuer pour visualiser le score après le jeu
+        bContinuer = new Button("Continuer");
+    	bContinuer.setBounds(10,350,100,40);
+    	bContinuer.addActionListener(new bContinuerFJeuListener(this));
+    	bContinuer.setVisible(false); // Non visible au départ
+        add(bContinuer);
+        
         // TextArea Explication des règles
         tbReglesJeu = new TextArea("", 20, 1, TextArea.SCROLLBARS_NONE);
         tbReglesJeu.setBounds(335, 35, 295, 355);
@@ -112,6 +120,11 @@ public class FenetreJeu extends Frame {
         tbReglesJeu.append("     - 7 : 0 point\n\n");
         tbReglesJeu.append("  Le but étant d'avoir le nombre de points le plus faible !\n  Bon jeu !");
         add(tbReglesJeu);
+        
+        pBackground = new Panel();
+        pBackground.setBounds(0, 0, getWidth(), getHeight());
+        pBackground.add(new ComposantImageAWT("/projet/ressources/background-jeu.png", getWidth(), getHeight()));
+        add(pBackground);
         
         Vector<Carte> cartes = new Vector<Carte>();
         InititialiserPioche(cartes);
@@ -141,7 +154,8 @@ public class FenetreJeu extends Frame {
         partie.ajouterRegle(2, memesValeursDifferentesCouleurs, retireSomme); // Mï¿½me valeur mais dï¿½pareillï¿½ en couleur : Soustrait de la somme des valeurs
         partie.ajouterRegle(3, memesValeursMemesCouleurs, retireDoubleSomme); // Mï¿½me valeur et mï¿½me couleur : Soustrait le double de la somme des valeurs
 
-        
+        this.revalidate();
+        this.repaint();
     }
 
     public boolean partieFinie(){
@@ -179,27 +193,22 @@ public class FenetreJeu extends Frame {
         //Affiche les scores
         lScore.setText("Votre score : " + partie.getScoreFinal() + " points.");
         
-        //Met à jour les composants sur la fenêtre
-        this.revalidate();
-        this.repaint();
-        
-        
         System.out.println("Tour n°" + tour + " : ");
         System.out.println("Carte 1 : " + tirage[tour-1][0]);
         System.out.println("Carte 2 : " + tirage[tour-1][1]);
         System.out.println("Points du tour : " + partie.getScoreDuTour());
         System.out.println("score : " + partie.getScoreFinal());
         
-        
         if (partieFinie()) {
         	bJouer.setVisible(false);
         	bRetour.setEnabled(false);
         	
-        	bContinuer = new Button("Continuer");
-        	bContinuer.setBounds(10,350,100,40);
-        	bContinuer.addActionListener(new bContinuerFJeuListener(this));
-            add(bContinuer);
+        	bContinuer.setVisible(true);
         }
+        
+        //Met à jour les composants sur la fenêtre
+        this.revalidate();
+        this.repaint();
     }
     
     public void InititialiserPioche(Vector<Carte> cartes) {
@@ -280,6 +289,10 @@ public class FenetreJeu extends Frame {
 		return imageCarte2;
 	}
 
+	public Panel getpBackGround() {
+		return pBackground;
+	}
+	
 	public Partie getPartie() {
 		return partie;
 	}

@@ -3,6 +3,7 @@ package projet.vue;
 import java.awt.Button;
 import java.awt.Frame;
 import java.awt.Label;
+import java.awt.Panel;
 import java.awt.TextArea;
 import java.awt.TextField;
 import java.util.Vector;
@@ -26,10 +27,11 @@ public class FenetreHighscores extends Frame {
 	        setLayout(null);
 	        setVisible(true);
 	        setLocationRelativeTo(null);
+	        setResizable(false);
 	        this.addWindowListener(new FermerFenetreListener(this));
 	        
 	        lScores = new Label("Voici les 10 meilleurs scores :");
-	        lScores.setBounds(20, 50, 200, 10);
+	        lScores.setBounds(80, 50, 200, 10);
 	        add(lScores);
 	        
 	        scores = Scores.getInstance().getScores();
@@ -48,6 +50,14 @@ public class FenetreHighscores extends Frame {
 	        bRetour.setBounds(230,250,100,40);
 	        bRetour.addActionListener(new bRetourListener(this));
 	        add(bRetour);
+	        
+	        Panel background = new Panel();
+	        background.setBounds(0, 0, getWidth(), getHeight());
+	        background.add(new ComposantImageAWT("/projet/ressources/background-highscores.png", getWidth(), getHeight()));
+	        add(background);
+	        
+	        this.revalidate();
+	        this.repaint();
 	}
 
 }

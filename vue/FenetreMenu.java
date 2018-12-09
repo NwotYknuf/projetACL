@@ -6,7 +6,6 @@ import projet.metier.Scores;
 
 public class FenetreMenu extends Frame{  
 
-    private Label titre;
     private Button bQuitter;
     private Button bLancer;
     private Button bHighscores;
@@ -18,8 +17,11 @@ public class FenetreMenu extends Frame{
         this.addWindowListener(new QuitterAppListener());
         setLayout(null);
         setLocationRelativeTo(null);
+        setResizable(false);
         setVisible(true);
 
+        Scores.getInstance().load("scores.txt");
+        
         bLancer = new Button("Lancer une partie");
         bLancer.setBounds(10,150,110,40);
         bLancer.addActionListener(new bLancerPartieFMenuListener());
@@ -35,10 +37,16 @@ public class FenetreMenu extends Frame{
         bHighscores.addActionListener(new bHighscoresFMenuListener());
         add(bHighscores);
 
-        titre = new Label("Super jeu de cartes");
-        titre.setBounds(100, 50, 150, 50);
+        Label titre = new Label("Super jeu");
+        titre.setBounds(140, 55, 60, 60);
         add(titre);
-
-        Scores.getInstance().load("scores.txt");
+        
+        Panel background = new Panel();
+        background.setBounds(0, 0, getWidth(), getHeight());
+        background.add(new ComposantImageAWT("/projet/ressources/background-menu.png", 170, 170));
+        add(background);
+        
+        this.revalidate();
+        this.repaint();
     }
 }

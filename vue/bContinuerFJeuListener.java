@@ -39,7 +39,7 @@ public class bContinuerFJeuListener implements ActionListener {
     	
     	//afficher félicitations
     	Panel pBravo = new Panel();
-    	pBravo.setBounds(40, 110, 260, 120);
+    	pBravo.setBounds(45, 110, 260, 120);
     	pBravo.add(new ComposantImageAWT("/projet/ressources/bravo.jpg", 260, 120));
         fenetre.add(pBravo);
     	
@@ -79,6 +79,16 @@ public class bContinuerFJeuListener implements ActionListener {
     	
     	fenetre.getbRetour().setEnabled(true);
     	fenetre.getbContinuer().setVisible(false);
+    	
+    	Panel background = fenetre.getpBackGround();
+    	background.remove(0);
+    	fenetre.remove(background);
+    	background.setBounds(0, 0, fenetre.getWidth(), fenetre.getHeight());
+    	background.add(new ComposantImageAWT("/projet/ressources/background-jeu-termine.png", fenetre.getWidth(), fenetre.getHeight()));
+    	fenetre.add(background);
+    	
+    	fenetre.revalidate();
+    	fenetre.repaint();
     }
 
 }

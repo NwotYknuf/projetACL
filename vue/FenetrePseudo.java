@@ -16,6 +16,7 @@ public class FenetrePseudo extends Frame{
         setLayout(null);
         setVisible(true);
         setLocationRelativeTo(null);
+        setResizable(false);
         this.addWindowListener(new FermerFenetreListener(this));
 
         lPseudo = new Label("Entrez votre pseudo");
@@ -37,7 +38,13 @@ public class FenetrePseudo extends Frame{
         bConfirmer.addActionListener(new bConfirmerFPseudoListener(this));
         add(bConfirmer);
 
-
+        Panel background = new Panel();
+        background.setBounds(0, 30, getWidth(), getHeight());
+        background.add(new ComposantImageAWT("/projet/ressources/background-pseudo.png", 245, 101));
+        add(background);
+        
+        this.revalidate();
+        this.repaint();
     }
 
     public String getPseudo(){
