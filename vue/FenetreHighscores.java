@@ -1,11 +1,12 @@
 package projet.vue;
 
 import java.awt.Button;
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.Frame;
 import java.awt.Label;
 import java.awt.Panel;
 import java.awt.TextArea;
-import java.awt.TextField;
 import java.util.Vector;
 
 import projet.metier.PaireScoreNom;
@@ -13,7 +14,6 @@ import projet.metier.Scores;
 
 public class FenetreHighscores extends Frame {
 	
-
     private Label lScores;
     private TextArea tbScores;
     private Button bRetour;
@@ -31,17 +31,19 @@ public class FenetreHighscores extends Frame {
 	        this.addWindowListener(new FermerFenetreListener(this));
 	        
 	        lScores = new Label("Voici les 10 meilleurs scores :");
-	        lScores.setBounds(80, 50, 200, 10);
+	        lScores.setBounds(60, 45, 210, 15);
+	        lScores.setFont(new Font("Courier New", Font.BOLD, 15));
+	        //lScores.setForeground(Color.BLUE);
 	        add(lScores);
 	        
 	        scores = Scores.getInstance().getScores();
 	        
 	        tbScores = new TextArea("", 10, 1, TextArea.SCROLLBARS_NONE);
-	        tbScores.setBounds(40, 70, 270, 170);
+	        tbScores.setBounds(30, 70, 290, 170);
 	        tbScores.setEditable(false);
 	        int i = 1;
 	        for (PaireScoreNom paire : scores) {
-	        	tbScores.append("     N°" + i + " : Score = " + paire.score + " ; Pseudo = " + paire.nom + "\n");
+	        	tbScores.append("     " + i + " :\tScore = " + paire.score + "\tPseudo = " + paire.nom + "\n");
 	        	i++;
 	        }
 	        add(tbScores);
