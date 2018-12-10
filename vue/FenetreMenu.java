@@ -36,7 +36,7 @@ public class FenetreMenu extends Frame{
         bQuitter.addActionListener(new bQuitterFMenuListener());
         add(bQuitter);
 
-        bHighscores = new Button("Highscores");
+        bHighscores = new Button("Records");
         bHighscores.setBounds(125,150,100,40);
         bHighscores.addActionListener(new bHighscoresFMenuListener());
         add(bHighscores);
