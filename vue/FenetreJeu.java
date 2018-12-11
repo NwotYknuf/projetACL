@@ -51,7 +51,7 @@ public class FenetreJeu extends Frame {
         add(lConsigne2);
         
         // Label num�ro du tour
-        lTour = new Label("Tour n�0 : ");
+        lTour = new Label("Tour n°0 : ");
         lTour.setBounds(145, 100, 50, 15);
         lTour.setForeground(Color.BLUE);
         add(lTour);
