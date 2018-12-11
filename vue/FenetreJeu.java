@@ -46,12 +46,12 @@ public class FenetreJeu extends Frame {
         lConsigne1 = new Label("Appuyez sur \"Jouer\" pour piocher deux cartes !");
         lConsigne1.setBounds(50, 60, 270, 15);
         add(lConsigne1);
-        lConsigne2 = new Label("Vous avez 5 tours pour faire le meilleur score (négatif) !");
+        lConsigne2 = new Label("Vous avez 5 tours pour faire le meilleur score (nÃ©gatif) !");
         lConsigne2.setBounds(20, 75, 305, 15);
         add(lConsigne2);
         
-        // Label numéro du tour
-        lTour = new Label("Tour n°0 : ");
+        // Label numï¿½ro du tour
+        lTour = new Label("Tour nï¿½0 : ");
         lTour.setBounds(145, 100, 50, 15);
         lTour.setForeground(Color.BLUE);
         add(lTour);
@@ -68,7 +68,7 @@ public class FenetreJeu extends Frame {
         imageCarte2.add(new ComposantImageAWT("/projet/ressources/0.png", 120, 175));
         add(imageCarte2);
         
-        // Label Regle Appliquée
+        // Label Regle Appliquï¿½e
         lRegleAppliquee = new Label("");
         lRegleAppliquee.setBounds(50, 295, 200, 15);
         add(lRegleAppliquee);
@@ -96,23 +96,23 @@ public class FenetreJeu extends Frame {
         bJouer.addActionListener(new bJouerFJeuListener(this));
         add(bJouer);
         
-        // Bouton Continuer pour visualiser le score après le jeu
+        // Bouton Continuer pour visualiser le score aprï¿½s le jeu
         bContinuer = new Button("Continuer");
     	bContinuer.setBounds(10,350,100,40);
     	bContinuer.addActionListener(new bContinuerFJeuListener(this));
-    	bContinuer.setVisible(false); // Non visible au départ
+    	bContinuer.setVisible(false); // Non visible au dï¿½part
         add(bContinuer);
         
-        // TextArea Explication des règles
+        // TextArea Explication des rï¿½gles
         tbReglesJeu = new TextArea("", 20, 1, TextArea.SCROLLBARS_NONE);
         tbReglesJeu.setBounds(335, 35, 295, 355);
         tbReglesJeu.setFont(new Font("Courier New", Font.PLAIN, 11));
         tbReglesJeu.setEditable(false);
-        tbReglesJeu.append("  Voici les règles du jeu :\n\n");
-        tbReglesJeu.append("  A chaque tour de jeu, deux cartes seront piochées, celles-ci vous rapporteront des points en fonctions du tirage selon le schéma suivant : \n");
-        tbReglesJeu.append("     1 - Les deux cartes n'ont pas la même valeur et/ou n'ont pas la même couleur = Ajout de la valeur des 2 cartes. \n");
-        tbReglesJeu.append("     2 - Les deux cartes ont la même valeur mais n'ont pas la même couleur = Retrait de la valeur des 2 cartes. \n");
-        tbReglesJeu.append("     3 - Les deux cartes ont la même valeur et ont la même couleur = Retrait 2 fois de la valeur des 2 cartes. \n\n");
+        tbReglesJeu.append("  Voici les rÃ¨gles du jeu :\n\n");
+        tbReglesJeu.append("  A chaque tour de jeu, deux cartes seront piochÃ©es, celles-ci vous rapporteront des points en fonctions du tirage selon le schÃ©ma suivant : \n");
+        tbReglesJeu.append("     1 - Les deux cartes n'ont pas la mÃªme valeur et/ou n'ont pas la mÃªme couleur = Ajout de la valeur des 2 cartes. \n");
+        tbReglesJeu.append("     2 - Les deux cartes ont la mÃªme valeur mais n'ont pas la mÃªme couleur = Retrait de la valeur des 2 cartes. \n");
+        tbReglesJeu.append("     3 - Les deux cartes ont la mÃªme valeur et ont la mÃªme couleur = Retrait 2 fois de la valeur des 2 cartes. \n\n");
         tbReglesJeu.append("  Vient enfin la valeur des cartes : \n");
         tbReglesJeu.append("     - As : 11 points\n");
         tbReglesJeu.append("     - 10 : 10 points\n");
@@ -122,7 +122,7 @@ public class FenetreJeu extends Frame {
         tbReglesJeu.append("     - 9 : 0 point\n");
         tbReglesJeu.append("     - 8 : 0 point\n");
         tbReglesJeu.append("     - 7 : 0 point\n\n");
-        tbReglesJeu.append("  Le but étant d'avoir le nombre de points le plus faible !\n  Bon jeu !");
+        tbReglesJeu.append("  Le but Ã©tant d'avoir le nombre de points le plus faible !\n  Bon jeu !");
         add(tbReglesJeu);
         
         pBackground = new Panel();
@@ -172,7 +172,7 @@ public class FenetreJeu extends Frame {
         //Affiche le tour
         
         int tour = partie.getNumeroTour();
-        lTour.setText("Tour n°" + tour + " : ");
+        lTour.setText("Tour nÂ°" + tour + " : ");
         
         //Affiche les cartes
         
@@ -187,9 +187,9 @@ public class FenetreJeu extends Frame {
         imageCarte2.remove(0);
         imageCarte2.add(new ComposantImageAWT(pathImage2, 120, 175));
         
-        //Affiche la règle appliquée
+        //Affiche la rï¿½gle appliquï¿½e
         int regleAppliquee = partie.getRegleDuTour();
-        lRegleAppliquee.setText("Grâce à la règle numéro " + regleAppliquee + " ;");
+        lRegleAppliquee.setText("GrÃ¢ce Ã  la rÃ¨gle numÃ©ro " + regleAppliquee + " ;");
         
         //Affiche les points du tour
         lPointsTour.setText("Vous optenez sur ce tour : " + partie.getScoreDuTour() + " points.");
@@ -197,7 +197,7 @@ public class FenetreJeu extends Frame {
         //Affiche les scores
         lScore.setText("Votre score : " + partie.getScoreFinal() + " points.");
         
-        System.out.println("Tour n°" + tour + " : ");
+        System.out.println("Tour nÂ°" + tour + " : ");
         System.out.println("Carte 1 : " + tirage[tour-1][0]);
         System.out.println("Carte 2 : " + tirage[tour-1][1]);
         System.out.println("Points du tour : " + partie.getScoreDuTour());
@@ -210,7 +210,7 @@ public class FenetreJeu extends Frame {
         	bContinuer.setVisible(true);
         }
         
-        //Met à jour les composants sur la fenêtre
+        //Met ï¿½ jour les composants sur la fenï¿½tre
         this.revalidate();
         this.repaint();
     }
