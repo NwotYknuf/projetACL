@@ -139,9 +139,9 @@ public class FenetreJeu extends Frame {
 
         partie = new Partie(paquet, pseudo);
         
-        ModificationScore somme = new ModificationScore(new Combinaison(1,1));
-        ModificationScore retireSomme = new ModificationScore(new Combinaison(-1, -1));
-        ModificationScore retireDoubleSomme = new ModificationScore(new Combinaison(-2, -2));
+        ModificationScore somme = new ModificationScoreCombinaison(new Combinaison(1,1));
+        ModificationScore retireSomme = new ModificationScoreCombinaison(new Combinaison(-1, -1));
+        ModificationScore retireDoubleSomme = new ModificationScoreCombinaison(new Combinaison(-2, -2));
 
         Regle memesCouleurs = new MemesCouleurs();
         Regle memesValeurs = new MemesValeurs();
